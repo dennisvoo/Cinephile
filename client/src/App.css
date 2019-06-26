@@ -1,0 +1,30 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-size: 100%;
+  background-position: bottom;
+  background-color: #95e8f3;
+  min-height: 100%;
+}
+
+form {
+  padding: 30px;
+  width: 1000px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.card {
+  width: 1000px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+form button, form h5{
+  margin: 20px 0;
+}
