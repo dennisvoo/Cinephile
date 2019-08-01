@@ -39,9 +39,9 @@ router.get('/:id', (req, res) => {
 // @desc    Create a comment
 // @access  Public
 router.post('/:id', (req, res) => {
-  const comment = {content: req.body.content, date: Date.now()};
+  const comment = {content: req.body.content};
   Post.findById(req.params.id).then((post) => {
-    post.comments.push(comment);
+    post.comments.unshift(comment);
     post.save().then(post => res.json(post));
   });
 });

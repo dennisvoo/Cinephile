@@ -20,8 +20,14 @@ const PostSchema = new Schema({
     default: Date.now
   },
   comments: [{
-    content: String,
-    date: Date
+    content: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    }
   }]
 });
 
