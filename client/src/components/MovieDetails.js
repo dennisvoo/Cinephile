@@ -4,8 +4,8 @@ import { getPostInfo, getComments, addComment } from '../actions/postActions';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import CommentBox from './CommentBox';
-import CommentList from './CommentList';
+import CommentBox from './comments/CommentBox';
+import CommentList from './comments/CommentList';
 
 class MovieDetails extends Component {
   componentDidMount() {
