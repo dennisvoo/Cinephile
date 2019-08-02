@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 class CommentBox extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class CommentBox extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <form method="post" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <textarea
@@ -69,7 +69,7 @@ class CommentBox extends Component {
             </button>
           </div>
         </form>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
