@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Container
+  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import SignUp from './auth/SignUp';
+import Login from './auth/Login';
+import Logout from './auth/Logout';
 
 class AppNavbar extends Component {
   state = {
@@ -22,6 +20,32 @@ class AppNavbar extends Component {
   };
 
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const authLinks = (
+      <Fragment>
+        <NavItem>
+          <span className='navbar-text mr-3'>
+            <strong>{user ? `Logged in as ${user.name}` : ''}</strong>
+          </span>
+        </NavItem>
+        <NavItem>
+          <Logout/>
+        </NavItem>
+      </Fragment>
+    );
+
+    const guestLinks = (
+      <Fragment>
+        <NavItem>
+          <SignUp/>
+        </NavItem>
+        <NavItem>
+          <Login/>
+        </NavItem>
+      </Fragment>
+    );
+
     return(
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
@@ -30,9 +54,7 @@ class AppNavbar extends Component {
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className = "ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="https://www.themoviedb.org/">TMDb</NavLink>
-                </NavItem>
+                {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
           </Container>
@@ -40,7 +62,14 @@ class AppNavbar extends Component {
       </div>
     );
   }
-
 }
 
-export default AppNavbar;
+AppNavbar.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect( mapStateToProps, null )(AppNavbar);

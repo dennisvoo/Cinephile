@@ -1,7 +1,10 @@
 import axios from 'axios';
 import {
-  GET_POSTS, ADD_POST, GET_POST_INFO, POSTS_LOADING, GET_COMMENTS, ADD_COMMENT
+  GET_POSTS, ADD_POST, DELETE_POST, GET_POST_INFO,
+  POSTS_LOADING, GET_COMMENTS, ADD_COMMENT, DELETE_COMMENT
 } from './types';
+import { tokenConfig } from './authActions';
+import { returnErrors } from './errorActions';
 
 export const getPosts = () => dispatch => {
   dispatch(setPostsLoading());
@@ -13,17 +16,37 @@ export const getPosts = () => dispatch => {
         payload: res.data
       })
     )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
-export const addPost = post => dispatch => {
+export const addPost = post => (dispatch, getState) => {
   axios
-    .post('/api/posts', post)
+    .post('/api/posts', post, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_POST,
         payload: res.data
       })
     )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const deletePost = id => (dispatch, getState) => {
+  axios
+    .delete(`/api/posts/${id}`, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: DELETE_POST,
+        payload: id
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const getPostInfo = id => dispatch => {
@@ -35,6 +58,9 @@ export const getPostInfo = id => dispatch => {
         payload: res.data
       })
     )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const setPostsLoading = () => {
@@ -52,15 +78,35 @@ export const getComments = id => dispatch => {
         payload: res.data.comments
       })
     )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
-export const addComment = (comment, id) => dispatch => {
+export const addComment = (comment, id) => (dispatch, getState) => {
   axios
-    .post(`/api/posts/${id}`, comment)
+    .post(`/api/posts/${id}`, comment, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_COMMENT,
         payload: res.data.comments
       })
     )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const deleteComment = (postid, commentid) => (dispatch, getState) => {
+  axios
+    .delete(`/api/posts/${postid}/${commentid}`, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: commentid
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };

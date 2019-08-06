@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
 // Post Model
 const Post = require('../../models/Posts');
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 // @route   POST api/posts
 // @desc    Create A Post
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
   const newPost = new Post({
     title: req.body.title,
     desc: req.body.desc,
@@ -38,7 +39,7 @@ router.get('/:id', (req, res) => {
 // @route   POST api/posts/:id
 // @desc    Create a comment
 // @access  Public
-router.post('/:id', (req, res) => {
+router.post('/:id', auth, (req, res) => {
   const comment = {content: req.body.content};
   Post.findById(req.params.id).then((post) => {
     post.comments.unshift(comment);
@@ -48,8 +49,8 @@ router.post('/:id', (req, res) => {
 
 // @route   DELETE api/posts/:id
 // @desc    Delete A Post
-// @access  Public
-router.delete('/:id', (req, res) => {
+// @access  Private
+router.delete('/:id', auth, (req, res) => {
   Post.findById(req.params.id)
     .then(post => post.remove().then(() => res.json({success: true})))
     .catch(err => res.status(404).json({success:false}));
@@ -57,8 +58,8 @@ router.delete('/:id', (req, res) => {
 
 // @route   DELETE api/:postid/:commentid
 // @desc    Delete A Comment
-// @access  Public
-router.delete('/:postid/:commentid', (req, res) => {
+// @access  Private
+router.delete('/:postid/:commentid', auth, (req, res) => {
   Post.findByIdAndUpdate(
     req.params.postid,
     { $pull: { comments : {_id: req.params.commentid} } }

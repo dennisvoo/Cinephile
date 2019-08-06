@@ -12,7 +12,7 @@ body {
   min-height: 100%;
 }
 
-form {
+.suggest-form {
   padding: 30px;
   width: 1000px;
   margin: auto;
@@ -23,6 +23,11 @@ form {
   width: 1000px;
   margin: auto;
   margin-bottom: 20px;
+}
+
+.guest-welcome {
+  text-align: center;
+  font-weight: bold;
 }
 
 form button, form h5{

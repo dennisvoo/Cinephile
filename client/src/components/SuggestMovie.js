@@ -24,7 +24,7 @@ class SuggestMovie extends Component {
   render () {
     return (
       <div className="container">
-        <form className="white z-depth-5" onSubmit={this.handleSubmit}>
+        <form className="suggest-form white z-depth-5" onSubmit={this.handleSubmit}>
           <h5 className="grey-text text-darken-3">Search for a Movie to Suggest</h5>
           <input
             placeholder="Search for a movie..."
