@@ -22,7 +22,8 @@ router.post('/', auth, (req, res) => {
     title: req.body.title,
     desc: req.body.desc,
     img: req.body.img,
-    comments: []
+    comments: [],
+    creator: req.body.creator
   });
 
   newPost.save().then(post => res.json(post));
@@ -40,7 +41,7 @@ router.get('/:id', (req, res) => {
 // @desc    Create a comment
 // @access  Public
 router.post('/:id', auth, (req, res) => {
-  const comment = {content: req.body.content};
+  const comment = {content: req.body.content, creator: req.body.creator};
   Post.findById(req.params.id).then((post) => {
     post.comments.unshift(comment);
     post.save().then(post => res.json(post));

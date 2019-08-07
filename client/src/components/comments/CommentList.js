@@ -1,13 +1,13 @@
-import React from "react";
-import Comment from "./Comment";
+import React from 'react';
+import Comment from './Comment';
 
 const CommentList = ({comments}) => {
   return (
     <div className="commentList">
 
       <h5 className="text-bold mb-4">
-        <span className="badge badge-success">{comments.length}</span>{" "}
-        Comment{comments.length > 0 ? "s" : ""}
+        <span className="badge badge-success">{comments.length}</span>{' '}
+        Comment{comments.length > 0 ? 's' : ''}
       </h5>
 
       {comments.length === 0 ? (

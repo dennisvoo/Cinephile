@@ -1,12 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class CommentBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: "",
+      error: '',
       comment: {
-        content: ""
+        content: '',
+        creator: ''
       }
     };
   }
@@ -15,7 +19,8 @@ class CommentBox extends Component {
     this.setState({
       ...this.state,
       comment: {
-        [e.target.name] : e.target.value
+        [e.target.name] : e.target.value,
+        creator: this.props.auth.user.name
       }
     });
   };
@@ -24,7 +29,12 @@ class CommentBox extends Component {
     e.preventDefault();
 
     if (!this.isFormValid()) {
-      this.setState({ error: "Comment cannot be empty." });
+      this.setState({ error: 'Comment cannot be empty.' });
+      return;
+    }
+
+    if (!this.isLoggedIn()) {
+      this.setState({ error: 'User must be logged in to comment.' });
       return;
     }
 
@@ -33,12 +43,16 @@ class CommentBox extends Component {
     this.props.addComment(this.state.comment, this.props.id);
 
     this.setState({
-      comment: { content: "" }
+      comment: { content: '', creator: '' }
     });
   }
 
   isFormValid() {
-    return this.state.comment.content !== "" ;
+    return this.state.comment.content !== '';
+  }
+
+  isLoggedIn() {
+    return this.props.auth.isAuthenticated;
   }
 
   renderError() {
@@ -55,9 +69,9 @@ class CommentBox extends Component {
             <textarea
               onChange={this.handleChange}
               value={this.state.comment.content}
-              placeholder="Your Comment"
-              name="content"
-              rows="5"
+              placeholder='Your Comment'
+              name='content'
+              rows='5'
             />
           </div>
 
@@ -74,4 +88,12 @@ class CommentBox extends Component {
   }
 }
 
-export default CommentBox;
+CommentBox.propTypes = {
+  user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(CommentBox);

@@ -3,10 +3,10 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
-import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { addPost } from '../actions/postActions';
+import PropTypes from 'prop-types';
 
 const API_KEY = '4f2273073e5d686e8071abb32cefd08f';
 const API_URL = 'https://api.themoviedb.org/3/search/movie';
@@ -19,7 +19,8 @@ class SearchResults extends Component {
     indexOfClickedItem: -1,
     title: '',
     desc: '',
-    img: ''
+    img: '',
+    creator: ''
   }
 
   componentDidMount() {
@@ -39,7 +40,8 @@ class SearchResults extends Component {
       indexOfClickedItem: index,
       title: this.state.results[index].title,
       desc: this.state.results[index].overview,
-      img: `${IMG_URL}${this.state.results[index].poster_path}`
+      img: `${IMG_URL}${this.state.results[index].poster_path}`,
+      creator: this.props.user.name
     })
   }
 
@@ -47,7 +49,8 @@ class SearchResults extends Component {
     const newPost = {
       title: this.state.title,
       desc: this.state.desc,
-      img: this.state.img
+      img: this.state.img,
+      creator: this.state.creator
     };
 
     this.props.addPost(newPost);
@@ -118,6 +121,12 @@ class SearchResults extends Component {
 
 SearchResults.propTypes = {
   addPost: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 }
 
-export default connect(null, { addPost })(SearchResults);
+
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps, { addPost })(SearchResults);

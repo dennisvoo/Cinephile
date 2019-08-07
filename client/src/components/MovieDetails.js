@@ -29,7 +29,7 @@ class MovieDetails extends Component {
             <p>{movie.desc}</p>
           </div>
           <div className="card-action gret lighten-4 white-text">
-            <div>Suggested by Dennis Vo on {moment(movie.date).format('MMMM Do, YYYY')}</div>
+            <div>Suggested by {movie.creator} on {moment(movie.date).format('MMMM Do, YYYY')}</div>
           </div>
         </div>
 
