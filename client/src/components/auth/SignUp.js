@@ -67,10 +67,10 @@ class SignUp extends Component {
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
-          Register
+          Sign Up
         </NavLink>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <Modal fade={false} isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
           <ModalBody>
             {this.state.msg ? (

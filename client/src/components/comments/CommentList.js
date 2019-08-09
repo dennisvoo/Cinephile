@@ -1,23 +1,27 @@
 import React from 'react';
 import Comment from './Comment';
 
-const CommentList = ({comments}) => {
+const CommentList = (props) => {
   return (
     <div className="commentList">
-
       <h5 className="text-bold mb-4">
-        <span className="badge badge-success">{comments.length}</span>{' '}
-        Comment{comments.length > 0 ? 's' : ''}
+        <span className="badge badge-success">{props.comments.length}</span>{' '}
+        Comment{props.comments.length > 0 ? 's' : ''}
       </h5>
 
-      {comments.length === 0 ? (
+      {props.comments.length === 0 ? (
         <div className="alert text-center alert-info">
           Be the first to comment
         </div>
       ) : null}
 
-      {comments.map((comment, index) => (
-        <Comment key={index} comment={comment} />
+      {props.comments.map((comment, index) => (
+        <Comment
+          key={index}
+          comment={comment}
+          deleteComment={props.deleteComment}
+          postid={props.postid}
+        />
       ))}
 
     </div>

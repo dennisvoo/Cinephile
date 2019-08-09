@@ -12,8 +12,8 @@ class Dashboard extends Component {
         <div>
           {this.props.isAuthenticated ?
             <SuggestMovie history={this.props.history}/> :
-              <h5 className="guest-welcome">
-              Welcome to Cinephile! Log in/Sign up to suggest movies.</h5> }
+              <h2 className="guest-welcome">
+              Welcome to Cinephile! Log in/Sign up to suggest movies.</h2> }
           <MovieList/>
         </div>
       </div>

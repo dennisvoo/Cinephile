@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {
-  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container
+  Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,16 +9,6 @@ import Login from './auth/Login';
 import Logout from './auth/Logout';
 
 class AppNavbar extends Component {
-  state = {
-    isOpen: false
-  };
-
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -52,11 +42,9 @@ class AppNavbar extends Component {
           <Container>
             <NavbarBrand href="/">Cinephile</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className = "ml-auto" navbar>
-                {isAuthenticated ? authLinks : guestLinks}
-              </Nav>
-            </Collapse>
+            <Nav className = "ml-auto" navbar>
+              {isAuthenticated ? authLinks : guestLinks}
+            </Nav>
           </Container>
         </Navbar>
       </div>

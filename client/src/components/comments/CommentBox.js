@@ -40,7 +40,7 @@ class CommentBox extends Component {
 
     this.setState({ error: "" });
 
-    this.props.addComment(this.state.comment, this.props.id);
+    this.props.addComment(this.state.comment, this.props.postid);
 
     this.setState({
       comment: { content: '', creator: '' }
@@ -78,7 +78,7 @@ class CommentBox extends Component {
           {this.renderError()}
 
           <div className="form-group">
-            <button className="btn btn-primary">
+            <button className="btn blue lighten-1">
               Comment &#10148;
             </button>
           </div>
@@ -89,7 +89,7 @@ class CommentBox extends Component {
 }
 
 CommentBox.propTypes = {
-  user: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
