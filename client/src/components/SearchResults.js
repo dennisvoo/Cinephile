@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { addPost } from '../actions/postActions';
 import PropTypes from 'prop-types';
 
-const API_KEY = '4f2273073e5d686e8071abb32cefd08f';
+const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 const API_URL = 'https://api.themoviedb.org/3/search/movie';
 const IMG_URL = 'https://image.tmdb.org/t/p/w300';
 
@@ -26,7 +26,8 @@ class SearchResults extends Component {
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
     axios
-      .get(`${API_URL}?api_key=${API_KEY}&language=en-US&query=${params.query}`)
+      .get(`${API_URL}?api_key=${API_KEY}&language=en-US&query=
+        ${params.query}&include_adult=false`)
       .then(({ data }) => {
         this.setState({
           results: data.results.slice(0,10),
