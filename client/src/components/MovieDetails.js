@@ -80,7 +80,7 @@ MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object
 }
 
 const mapStateToProps = (state) => ({
