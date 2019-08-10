@@ -41,3 +41,7 @@ form button, form h5{
   padding: 0px;
   font-size: 12px;
 }
+
+.display-linebreak {
+  white-space: pre-line;
+}

@@ -6,7 +6,6 @@ import moment from 'moment'
 class Comment extends Component {
   handleClick = (postid, commentid) => {
     this.props.deleteComment(postid, commentid);
-    console.log('delete');
   };
 
   render() {
@@ -16,7 +15,7 @@ class Comment extends Component {
 
     return (
       <div className="media mb-3">
-        <div className="media-body p-2 shadow-sm rounded bg-light border">
+        <div className="media-body p-2 shadow-sm rounded bg-light border display-linebreak">
           <small className="float-right text-muted">{moment(date).format('MMMM Do, YYYY')}</small>
             <h6 className="mt-0 mb-1 text-muted">{creator}
             {isAuthenticated && user.name === creator ? (

@@ -48,7 +48,7 @@ class CommentBox extends Component {
   }
 
   isFormValid() {
-    return this.state.comment.content !== '';
+    return this.state.comment.content.trim() !== '';
   }
 
   isLoggedIn() {
