@@ -37,7 +37,7 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  release_year: {
+  year: {
     type: String
   }
 });

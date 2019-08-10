@@ -21,7 +21,7 @@ class SearchResults extends Component {
     desc: '',
     img: '',
     creator: '',
-    release_year: ''
+    year: ''
   }
 
   componentDidMount() {
@@ -44,7 +44,7 @@ class SearchResults extends Component {
       desc: this.state.results[index].overview,
       img: `${IMG_URL}${this.state.results[index].poster_path}`,
       creator: this.props.user.name,
-      release_year: `(${this.state.results[index].release_date.substring(0,4)})`
+      year: `(${this.state.results[index].release_date.substring(0,4)})`
     })
   }
 
@@ -54,7 +54,7 @@ class SearchResults extends Component {
       desc: this.state.desc,
       img: this.state.img,
       creator: this.state.creator,
-      release_year: this.state.release_year
+      year: this.state.year
     };
 
     this.props.addPost(newPost);

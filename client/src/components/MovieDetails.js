@@ -25,7 +25,7 @@ class MovieDetails extends Component {
     const postid = this.props.match.params.id;
     const movie = this.props.movie;
     const title = movie.title;
-    const release_year = movie.release_year;
+    const year = movie.year;
     const date = moment(movie.date).format('MMMM Do, YYYY');
     const { isAuthenticated, user } = this.props.auth;
 
@@ -38,7 +38,7 @@ class MovieDetails extends Component {
           <div className="card-content white-text">
             <img src={movie.img} align="left" hspace="20" alt="poster" />
             <span className="card-title" style={{fontSize: "300%"}}>
-              {title} {release_year}
+              {title} {year}
             </span>
             <br/>
             <b style={{fontSize:"150%"}}>Description</b>

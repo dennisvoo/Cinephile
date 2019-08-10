@@ -5,7 +5,7 @@ const PostSummary = ({post}) => {
   return (
     <div className="card post-summary">
       <div className="card-content grey-text text-darken-3">
-        <span className="card-title">{post.title} {post.release_year}</span>
+        <span className="card-title">{post.title} {post.year}</span>
         <p>Suggested by: {post.creator}</p>
         <p className="grey-text text-darken-3">
           Posted on: {moment(post.date).format('MMMM Do, YYYY')}
