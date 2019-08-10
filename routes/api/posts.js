@@ -23,7 +23,8 @@ router.post('/', auth, (req, res) => {
     desc: req.body.desc,
     img: req.body.img,
     comments: [],
-    creator: req.body.creator
+    creator: req.body.creator,
+    release_year: req.body.release_year
   });
 
   newPost.save().then(post => res.json(post));

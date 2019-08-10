@@ -36,6 +36,9 @@ const PostSchema = new Schema({
   creator: {
     type: String,
     required: true
+  },
+  release_year: {
+    type: String
   }
 });
 

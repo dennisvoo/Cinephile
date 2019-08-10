@@ -20,7 +20,8 @@ class SearchResults extends Component {
     title: '',
     desc: '',
     img: '',
-    creator: ''
+    creator: '',
+    release_year: ''
   }
 
   componentDidMount() {
@@ -42,7 +43,8 @@ class SearchResults extends Component {
       title: this.state.results[index].title,
       desc: this.state.results[index].overview,
       img: `${IMG_URL}${this.state.results[index].poster_path}`,
-      creator: this.props.user.name
+      creator: this.props.user.name,
+      release_year: `(${this.state.results[index].release_date.substring(0,4)})`
     })
   }
 
@@ -51,7 +53,8 @@ class SearchResults extends Component {
       title: this.state.title,
       desc: this.state.desc,
       img: this.state.img,
-      creator: this.state.creator
+      creator: this.state.creator,
+      release_year: this.state.release_year
     };
 
     this.props.addPost(newPost);
